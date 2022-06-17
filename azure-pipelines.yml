@@ -16,11 +16,6 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'Write-Host "##vso[task.setvariable variable=DX_NUGET_PUB;]$(DX_NUGET)"'
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
@@ -29,13 +24,7 @@ steps:
     nugetConfigPath: 'Nuget.config'
     externalFeedCredentials: 'MyNewDXNuget2'
    
-- task: NuGetCommand@2
-  inputs:
-    command: 'custom'
-    arguments: 'install DevExpress.EasyTest.TestExecutor -OutputDirectory MyTempFolder -configfile NuGet.config'
-    feedsToUse: 'config'
-    nugetConfigPath: 'Nuget.config'
-    externalFeedCredentials: 'MyNewDXNuget2'
+
 
 
 - task: VSBuild@1
@@ -59,7 +48,7 @@ steps:
           $tempFolderName="MyTempFolder"
           $targetVersion="v21.2"
           sqllocaldb start MSSQLLocalDB  
-          
+          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -configfile NuGet.config  
           New-Item -ItemType directory -Path "$tempFolderName\Bin"  
           Get-ChildItem -Path "$tempFolderName\*" -Include *.dll,*.exe -Recurse | Where {$_.FullName -like $targetFrameworkFilter -or $_.FullName -like "*\any\*"} | Copy-Item -Destination "$tempFolderName\Bin"  
           Copy-Item "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll" -Destination "$tempFolderName\Bin"  
