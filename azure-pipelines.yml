@@ -24,7 +24,7 @@ steps:
           Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password ${env:MY_MAPPED_ENV_VAR}
           Nuget restore
   env:
-    MY_MAPPED_ENV_VAR: $(MYNEWVAR) # the recommended way to map to an env variable       
+    MY_MAPPED_ENV_VAR: $(MYVARIABLEWITHDXFEED) # the recommended way to map to an env variable       
 
 - task: VSBuild@1
   inputs:
