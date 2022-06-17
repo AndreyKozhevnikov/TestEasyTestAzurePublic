@@ -28,7 +28,7 @@ steps:
           sqllocaldb start MSSQLLocalDB
           $test2 = ${env:MYNEWVAR}
           echo $test2
-         #$test3= $(MYNEWVAR)
+          #$test3= $(MYNEWVAR)
           #echo $test3
           #$test4 = $(MyNewVar)
           #echo $test4
