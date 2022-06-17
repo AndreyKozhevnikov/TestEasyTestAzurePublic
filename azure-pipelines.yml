@@ -17,10 +17,11 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 - task: PowerShell@1 
-  displayName: EasyTest  
+  displayName: Install MyDxFeed  
   inputs:  
         targetType: 'inline'  
-        script: |  
+        script: |
+          echo 'test3443'         
           Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33%
           Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
 - task: NuGetCommand@2
