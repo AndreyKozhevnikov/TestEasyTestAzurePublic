@@ -49,12 +49,10 @@ steps:
   inputs:
     command: 'restore'
     restoreSolution: '$(solution)'
-    feedsToUse: 'config'
-    nugetConfigPath: 'Nuget.config'
-    externalFeedCredentials: 'MyNewDXNuget2'
+    feedsToUse: 'select'
+
 
    
-
 
 
 - task: VSBuild@1
