@@ -22,6 +22,7 @@ steps:
     restoreSolution: '$(solution)'
     feedsToUse: 'config'
     nugetConfigPath: 'Nuget.config'
+    externalFeedCredentials: 'MyNewDXNuget2'
    
 
 
