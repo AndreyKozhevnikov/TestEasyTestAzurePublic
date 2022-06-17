@@ -16,14 +16,7 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-- task: PowerShell@1 
-  displayName: Install MyDxFeed  
-  inputs:  
-        targetType: 'inline'  
-        script: |
-          echo 'test3443'         
-          Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33%
-          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
+
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
@@ -45,7 +38,15 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
+- task: PowerShell@1 
+  displayName: Install MyDxFeed  
+  inputs:  
+        targetType: 'inline'  
+        script: |
+          sqllocaldb start MSSQLLocalDB
+          echo 'test3443'         
+          #Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33%
+          #Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
 - task: PowerShell@2  
   displayName: EasyTest  
   inputs:  
