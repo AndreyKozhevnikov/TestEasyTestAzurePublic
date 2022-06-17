@@ -26,11 +26,11 @@ steps:
           $tempFolderName="MyTempFolder"
           $targetVersion="v21.2"
           sqllocaldb start MSSQLLocalDB
-          $tempVar=${env:MYTESTVAR33}
+          $tempVar=$(MYTESTVAR33)
           echo MyTest2134324
           echo $tempVar
           $tempVar
-          Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password ${env:MYTESTVAR33} 
+          Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password $(MYTESTVAR33) 
           Nuget sources          
           Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache  
 
