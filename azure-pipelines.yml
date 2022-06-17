@@ -16,16 +16,6 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    feedsToUse: 'config'
-    nugetConfigPath: 'Nuget.config'
-    externalFeedCredentials: 'MyNewDXNuget2'
-
-   
-
 - task: PowerShell@2  
   displayName: NewTest  
   inputs:  
@@ -45,6 +35,17 @@ steps:
           &"$tempFolderName\Bin\TestExecutor.$targetVersion.exe" $easyTestPath  
           Get-Content -Path $easyTestPath\TestsLog.xml  
           if(Select-String -Pattern 'Result="Failed"', 'Result="Warning"' -Path $easyTestPath\TestsLog.xml) { exit 1 }  
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: 'Nuget.config'
+    externalFeedCredentials: 'MyNewDXNuget2'
+
+   
+
+
 
 - task: VSBuild@1
   inputs:
