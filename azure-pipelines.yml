@@ -26,18 +26,6 @@ steps:
 
    
 
-
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
 - task: PowerShell@2  
   displayName: NewTest  
   inputs:  
@@ -57,6 +45,18 @@ steps:
           &"$tempFolderName\Bin\TestExecutor.$targetVersion.exe" $easyTestPath  
           Get-Content -Path $easyTestPath\TestsLog.xml  
           if(Select-String -Pattern 'Result="Failed"', 'Result="Warning"' -Path $easyTestPath\TestsLog.xml) { exit 1 }  
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
 - task: PowerShell@2  
   displayName: EasyTest  
   inputs:  
