@@ -26,8 +26,6 @@ steps:
           $tempFolderName="MyTempFolder"
           $targetVersion="v21.2"
           sqllocaldb start MSSQLLocalDB
-          $test1 = %MYNEWVAR%
-          echo $test1
           $test2 = ${env:MYNEWVAR}
           echo $test2
           $test3= $(MYNEWVAR)
