@@ -27,7 +27,7 @@ steps:
           $targetVersion="v21.2"
           sqllocaldb start MSSQLLocalDB
           echo testStart
-          $test2 = ${env:MYNEWVAR}
+          $test2 = ${env:MY_MAPPED_ENV_VAR}
           echo $test2
           #$test3= $(MYNEWVAR)
           #echo $test3
@@ -41,7 +41,9 @@ steps:
           echo testFinish
           Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password $(MYTESTVAR33) 
           Nuget sources          
-          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache  
+          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
+  env:
+    MY_MAPPED_ENV_VAR: $(MYNEWVAR) # the recommended way to map to an env variable       
 
 - task: NuGetCommand@2
   inputs:
