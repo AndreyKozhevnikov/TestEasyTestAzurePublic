@@ -16,13 +16,20 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+- task: AddDxFeed 
+  displayName: EasyTest  
+  inputs:  
+        targetType: 'inline'  
+        script: |  
+          Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33%
+          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
     restoreSolution: '$(solution)'
     feedsToUse: 'config'
     nugetConfigPath: 'Nuget.config'
-    externalFeedCredentials: 'MyNewDXNuget2'
+
    
 
 
