@@ -47,8 +47,9 @@ steps:
           $targetFrameworkFilter="*\net452\*"
           $tempFolderName="MyTempFolder"
           $targetVersion="v21.2"
-          sqllocaldb start MSSQLLocalDB  
-          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -configfile NuGet.config  
+          sqllocaldb start MSSQLLocalDB
+          Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password ${env:MYTESTVAR33}          
+          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -NoCache  
           New-Item -ItemType directory -Path "$tempFolderName\Bin"  
           Get-ChildItem -Path "$tempFolderName\*" -Include *.dll,*.exe -Recurse | Where {$_.FullName -like $targetFrameworkFilter -or $_.FullName -like "*\any\*"} | Copy-Item -Destination "$tempFolderName\Bin"  
           Copy-Item "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll" -Destination "$tempFolderName\Bin"  
