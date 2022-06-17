@@ -20,8 +20,9 @@ steps:
   inputs:
     command: 'restore'
     restoreSolution: '$(solution)'
-    feedsToUse: 'select'
-    vstsFeed: '57c164dd-07e4-4baf-af28-270d56418ab2'
+    feedsToUse: 'config'
+    nugetConfigPath: 'Nuget.config'
+    externalFeedCredentials: 'MyDxNugetFeed'
    
 
 
