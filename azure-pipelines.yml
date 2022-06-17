@@ -50,7 +50,7 @@ steps:
           sqllocaldb start MSSQLLocalDB
           Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33% 
           Nuget sources          
-          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -NoCache  
+          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache  
           New-Item -ItemType directory -Path "$tempFolderName\Bin"  
           Get-ChildItem -Path "$tempFolderName\*" -Include *.dll,*.exe -Recurse | Where {$_.FullName -like $targetFrameworkFilter -or $_.FullName -like "*\any\*"} | Copy-Item -Destination "$tempFolderName\Bin"  
           Copy-Item "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll" -Destination "$tempFolderName\Bin"  
