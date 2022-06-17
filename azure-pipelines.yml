@@ -21,26 +21,9 @@ steps:
   inputs:  
         targetType: 'inline'  
         script: |  
-          $easyTestPath="dxT1094310v1.Module\FunctionalTests"
-          $targetFrameworkFilter="*\net452\*"
           $tempFolderName="MyTempFolder"
-          $targetVersion="v21.2"
           sqllocaldb start MSSQLLocalDB
-          echo testStart
-          $test2 = ${env:MY_MAPPED_ENV_VAR}
-          echo $test2
-          #$test3= $(MYNEWVAR)
-          #echo $test3
-          #$test4 = $(MyNewVar)
-          #echo $test4
-          
-          #$tempVar=$(MYTESTVAR33)
-          #echo MyTest2134324
-          #echo $tempVar
-          #$tempVar
-          echo testFinish
           Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password ${env:MY_MAPPED_ENV_VAR}
-          Nuget sources          
           Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
           Nuget restore
   env:
