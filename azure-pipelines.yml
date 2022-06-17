@@ -38,15 +38,25 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-- task: PowerShell@1 
-  displayName: Install MyDxFeed  
+- task: PowerShell@2  
+  displayName: NewTest  
   inputs:  
         targetType: 'inline'  
-        script: |
+        script: |  
+          $easyTestPath="dxT1094310v1.Module\FunctionalTests"
+          $targetFrameworkFilter="*\net452\*"
+          $tempFolderName="MyTempFolder"
+          $targetVersion="v21.2"
           sqllocaldb start MSSQLLocalDB
-          echo 'test3443'         
-          #Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33%
-          #Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
+          Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password %MYTESTVAR33% 
+          Nuget sources          
+          Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache  
+          New-Item -ItemType directory -Path "$tempFolderName\Bin"  
+          Get-ChildItem -Path "$tempFolderName\*" -Include *.dll,*.exe -Recurse | Where {$_.FullName -like $targetFrameworkFilter -or $_.FullName -like "*\any\*"} | Copy-Item -Destination "$tempFolderName\Bin"  
+          Copy-Item "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll" -Destination "$tempFolderName\Bin"  
+          &"$tempFolderName\Bin\TestExecutor.$targetVersion.exe" $easyTestPath  
+          Get-Content -Path $easyTestPath\TestsLog.xml  
+          if(Select-String -Pattern 'Result="Failed"', 'Result="Warning"' -Path $easyTestPath\TestsLog.xml) { exit 1 }  
 - task: PowerShell@2  
   displayName: EasyTest  
   inputs:  
