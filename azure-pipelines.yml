@@ -42,18 +42,9 @@ steps:
           Nuget sources add -name MyNewTestFeed -source https://nuget.devexpress.com/api/ -username DevExpress -password ${env:MY_MAPPED_ENV_VAR}
           Nuget sources          
           Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache
+          Nuget restore
   env:
     MY_MAPPED_ENV_VAR: $(MYNEWVAR) # the recommended way to map to an env variable       
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    feedsToUse: 'select'
-
-
-   
-
 
 - task: VSBuild@1
   inputs:
