@@ -33,6 +33,9 @@ steps:
   inputs:
     command: 'custom'
     arguments: 'install DevExpress.EasyTest.TestExecutor -OutputDirectory MyTempFolder -configfile NuGet.config'
+    feedsToUse: 'config'
+    nugetConfigPath: 'Nuget.config'
+    externalFeedCredentials: 'MyNewDXNuget2'
 
 
 - task: VSBuild@1
