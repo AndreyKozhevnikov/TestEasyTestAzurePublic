@@ -16,13 +16,13 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
     restoreSolution: '$(solution)'
     feedsToUse: 'config'
     nugetConfigPath: 'Nuget.config'
+    externalFeedCredentials: 'MyNewDXNuget2'
 
    
 
