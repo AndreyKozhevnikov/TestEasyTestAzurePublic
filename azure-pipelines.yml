@@ -45,7 +45,7 @@ steps:
           $easyTestPath="dxT1094310v1.Module\FunctionalTests"
           $targetFrameworkFilter="*\net452\*"
           $tempFolderName="MyTempFolder"
-          $targetVersion="v21.2"
+          $targetVersion="v22.1"
           sqllocaldb start MSSQLLocalDB
           Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory $tempFolderName -source MyNewTestFeed -source nuget.org -NoCache  
           New-Item -ItemType directory -Path "$tempFolderName\Bin"  
