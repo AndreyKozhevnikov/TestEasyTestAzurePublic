@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:  
-  name: kozhevnikov-nbx 
+  name: KOZHEVNIKOV-NBX
 
 variables:
   solution: '**/*.sln'
