@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:  
-  name: KOZHEVNIKOV-NBX
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
